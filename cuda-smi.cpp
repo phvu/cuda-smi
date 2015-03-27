@@ -28,7 +28,7 @@ int main() {
         printf(" [PCIe %04x:%02x:%02x.0]", deviceProp.pciDomainID, deviceProp.pciBusID, deviceProp.pciDeviceID);
         printf(": %20s (CC %d.%d)", deviceProp.name, deviceProp.major, deviceProp.minor);
         CUDA_CALL(cudaMemGetInfo, &memFree, &memTotal);
-        printf(": %5zu of %5zu MiB Free", memFree, memTotal);
+        printf(": %5zu of %5zu MiB (i.e. %.5f%%) Free", memFree, memTotal, 100*memFree/(float)memTotal);
         printf("\n");
     }
     return 0;
