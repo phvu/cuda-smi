@@ -16,3 +16,7 @@ Run
 ```
 
 The output file is `cuda-smi`. Feel free to copy it to somewhere in your `PATH` directories.
+
+Credits
+====
+I made this code based on [al42and's project](https://github.com/al42and/cuda-smi).
