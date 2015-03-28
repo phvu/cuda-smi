@@ -1,5 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <iostream>
+#include <iomanip>
 #include <cuda_runtime_api.h>
 
 #define CUDA_CALL(function, ...)  { \
@@ -9,7 +9,7 @@
 
 void anyCheck(bool is_ok, const char *description, const char *function, const char *file, int line) {
     if (!is_ok) {
-        fprintf(stderr,"Error: %s in %s at %s:%d\n", description, function, file, line);
+        std::cout << "Error: " << description << " in " << function << " at " << file << ":" << line << std::endl;
         exit(EXIT_FAILURE);
     }
 }
@@ -24,12 +24,16 @@ int main() {
     for (int deviceId = 0; deviceId < cudaDeviceCount; ++deviceId) {
         CUDA_CALL(cudaGetDeviceProperties, &deviceProp, deviceId);
         
-        printf("Device %2d", deviceId);
-        printf(" [PCIe %04x:%02x:%02x.0]", deviceProp.pciDomainID, deviceProp.pciBusID, deviceProp.pciDeviceID);
-        printf(": %20s (CC %d.%d)", deviceProp.name, deviceProp.major, deviceProp.minor);
+        //std::cout.imbue(std::locale("en_US.utf8"));
+        std::cout << "Device " << deviceId;
+        std::cout << " [PCIe " << deviceProp.pciDomainID << ":" << deviceProp.pciBusID
+                  << ":" << deviceProp.pciDeviceID << ".0]";
+        std::cout << ": " << deviceProp.name << " (CC " << deviceProp.major << "." << deviceProp.minor << ")";
         CUDA_CALL(cudaMemGetInfo, &memFree, &memTotal);
-        printf(": %5zu of %5zu MiB (i.e. %.5f%%) Free", memFree, memTotal, 100*memFree/(float)memTotal);
-        printf("\n");
+        std::cout << ": " << std::setprecision(5) << memFree/(1024*1024.) 
+                  << " of " << memTotal/(1024*1024.) << " MB (i.e. "
+                  << std::setprecision(3) << 100*memFree/(float)memTotal << "%) Free"
+                  << std::endl;
     }
     return 0;
 }
