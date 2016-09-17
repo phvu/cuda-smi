@@ -22,8 +22,9 @@ int main() {
     CUDA_CALL(cudaGetDeviceCount, &cudaDeviceCount);
 
     for (int deviceId = 0; deviceId < cudaDeviceCount; ++deviceId) {
+        CUDA_CALL(cudaSetDevice, deviceId);
         CUDA_CALL(cudaGetDeviceProperties, &deviceProp, deviceId);
-        
+
         //std::cout.imbue(std::locale("en_US.utf8"));
         std::cout << "Device " << deviceId;
         std::cout << " [PCIe " << deviceProp.pciDomainID << ":" << deviceProp.pciBusID
