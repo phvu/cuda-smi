@@ -5,7 +5,14 @@ On Windows/Linux, there is a program called `nvidia-smi` for checking the memory
 
 There is no such thing on MacOS.
 
-This program tries to bring that ability to MacOS. However at the current version, it can only check the free memory and some basic info.
+This program tries to bring that ability to MacOS. 
+The main functionality is to display memory usage of each GPU.
+
+Binary
+====
+
+Pre-built binary can be downloaded from [here](https://github.com/micahstubbs/cuda-smi/releases/tag/v1.0).
+
 
 Usage
 ====
@@ -28,4 +35,4 @@ Your mileage may vary.
 
 Credits
 ====
-I made this code based on [al42and's project](https://github.com/al42and/cuda-smi).
+I based this on [al42and's project](https://github.com/al42and/cuda-smi).

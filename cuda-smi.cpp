@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <iostream>
 #include <iomanip>
 #include <cuda_runtime_api.h>
